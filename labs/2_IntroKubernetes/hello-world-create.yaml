@@ -8,5 +8,13 @@ spec:
     image: us.icr.io/<my_namespace>/hello-world:1
     ports:
     - containerPort: 8080
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      capabilities:
+        drop: ["ALL"]
+      seccompProfile:
+        type: "RuntimeDefault"
+      runAsUser: 999
   imagePullSecrets:
   - name: icr
