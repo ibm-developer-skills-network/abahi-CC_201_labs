@@ -33,10 +33,17 @@ spec:
             memory: 30Mi
           requests:
             cpu: 1m
-            memory: 10Mi   
+            memory: 10Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: "RuntimeDefault"
+          runAsUser: 999
       imagePullSecrets:
       - name: icr
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      securityContext: {}
       terminationGracePeriodSeconds: 30
